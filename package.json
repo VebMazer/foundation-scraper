@@ -4,7 +4,9 @@
   "description": "Scraping service that uses nightmare package",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "node index.js",
+    "watch": "cross-env NODE_ENV=development nodemon index.js",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "repository": {
     "type": "git",
@@ -24,5 +26,9 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "nightmare": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "cross-env": "^5.2.0"
   }
 }

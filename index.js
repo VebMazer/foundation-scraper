@@ -5,6 +5,8 @@ const Nightmare = require('nightmare')
 const fs = require('fs');
 const nightmare = Nightmare({ show: false })
 
+let data = {}
+
 nightmare
     .goto('https://tyopaikat.oikotie.fi')
     .type('input.field', 'trainee')
@@ -20,25 +22,35 @@ nightmare
     .end()
     .then( data => {
       const array = Object.values(data)
-      let list = (JSON.stringify(array, null, 1))
+      data = (JSON.stringify(array, null, 1))
+      //let list = (JSON.stringify(array, null, 1))
 
-      fs.writeFile('links.json', list, (err) => {
-        if (err) throw err
-        console.log('JSON saved!')
-      })
+      // fs.writeFile('links.json', list, (err) => {
+      //   if (err) throw err
+      //   console.log('JSON saved!')
+      // })
+
+      //data = {objects: list}
+      console.log(data)
+
     })
     .catch(error => {
       console.error('scraping failed:', error)
     })
 
 app.get('/', (req, res) => {
-  if(data === ''){
-    res.send(`<h1>Data not yet available</h1>`)
-  } else{
-      res.send(`<h1>${data}</h1>`)
-  }
+  // if(data === {}){
+  //   res.send(`<h1>Data not yet available</h1>`)
+  // } else{
+  //     res.json(data)
+  //     //res.send(`<h1${data.json}</h1>`)
+  // }
+  res.json(data)
 
-    });
+    })
+
+const scrapingRouter = require('express').Router()
+app.use('/', scrapingRouter)
 
 const PORT = 3002
 app.listen(PORT, () => {
