@@ -1,0 +1,26 @@
+{
+  "name": "foundation-scraper",
+  "version": "1.0.0",
+  "description": "Scraping service that uses nightmare package",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VebMazer/foundation-scraper.git"
+  },
+  "keywords": [
+    "scrape",
+    "nightmare"
+  ],
+  "author": "Veikko Laine, Samuli Schroderus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VebMazer/foundation-scraper/issues"
+  },
+  "homepage": "https://github.com/VebMazer/foundation-scraper#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
