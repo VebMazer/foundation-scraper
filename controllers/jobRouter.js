@@ -35,7 +35,7 @@ jobRouter.post('/oikotie', async (req, res) => {
           console.error('scraping failed:', error)
         })
 
-    console.log(objects)
+    //console.log(objects)
     res.json(objects)
 
   } catch (exception) {
@@ -49,6 +49,8 @@ jobRouter.post('/avointyopaikka', async (req, res) => {
     let { keyword, location } = req.body
 
     const nightmare = Nightmare({ show: false })
+
+    let objects = null
 
     //avointyopaikka.fi
     //https://avointyopaikka.fi/hae?kw=HAKUSANA&location=LOKAATIO
@@ -64,14 +66,16 @@ jobRouter.post('/avointyopaikka', async (req, res) => {
     }, 'a.job-item__link')
     .end()
     .then( data => {
+
       const array = Object.values(data)
-      data = (JSON.stringify(array, null, 1))
-      console.log(data)
+      objects = array.map(j => ({link: j}))
 
     })
     .catch(error => {
       console.error('scraping failed:', error)
     })
+
+    res.json(objects)
 
   } catch (exception) {
     return res.status(500).json({ error: 'something went wrong...' })
