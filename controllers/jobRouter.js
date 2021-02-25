@@ -8,8 +8,6 @@ scrapingRouter.get('/oikotie', async (req, res) => {
   try {
     let { location } = res.body
 
-    link = 'https://tyopaikat.oikotie.fi'
-
     nightmare
         .goto('https://tyopaikat.oikotie.fi')
         .type('input.field', 'trainee')
@@ -47,6 +45,17 @@ scrapingRouter.get('/oikotie', async (req, res) => {
     return res.status(500).json({ error: 'something went wrong...' })
   }
 })
+
+
+scrapingRouter.get('/avointyopaikka', async (req, res) => {
+  try {
+
+
+  } catch (exception) {
+    return res.status(500).json({ error: 'something went wrong...' })
+  }
+
+}
 
 //Oikotie.fi
 /*nightmare
