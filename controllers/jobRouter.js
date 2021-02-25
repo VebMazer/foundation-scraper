@@ -6,7 +6,7 @@ const nightmare = Nightmare({ show: false })
 //Oikotie työpaikka haku.
 jobRouter.get('/oikotie', async (req, res) => {
   try {
-    let { location } = res.body
+    let { } = res.body
 
     let objects = null
 
