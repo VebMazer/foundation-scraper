@@ -6,13 +6,12 @@ const nightmare = Nightmare({ show: false })
 //Oikotie työpaikka haku.
 jobRouter.get('/oikotie', async (req, res) => {
   try {
-    let { } = res.body
+    let { } = req.body
 
     let objects = null
 
     //https://tyopaikat.oikotie.fi/tyopaikat/helsinki?hakusana=Developer
     nightmare
-    
         .goto('https://tyopaikat.oikotie.fi/tyopaikat/helsinki?hakusana=Developer')
         //.type('input.field', 'trainee')
         //.click('button.primary')
@@ -27,14 +26,7 @@ jobRouter.get('/oikotie', async (req, res) => {
         .end()
         .then( data => {
           const array = Object.values(data)
-          //data = (JSON.stringify(array, null, 1))
-
-          objects = array.map(j => {link: j})
-          objects = (JSON.stringify(data, null, 1))
-          //let list = (JSON.stringify(array, null, 1))
-
-          //data = {objects: list}
-          console.log(objects)
+          objects = array.map(j => ({link: j}))
 
         })
         .catch(error => {
