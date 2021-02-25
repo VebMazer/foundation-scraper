@@ -1,12 +1,14 @@
 const jobRouter = require('express').Router()
 
 const Nightmare = require('nightmare')
-const nightmare = Nightmare({ show: false })
+//const nightmare = Nightmare({ show: false })
 
 //Oikotie työpaikka haku.
 jobRouter.post('/oikotie', async (req, res) => {
   try {
     let { } = req.body
+
+    const nightmare = Nightmare({ show: false })
 
     let objects = null
 
@@ -33,7 +35,7 @@ jobRouter.post('/oikotie', async (req, res) => {
           console.error('scraping failed:', error)
         })
 
-    //console.log(objects)
+    console.log(objects)
     res.json(objects)
 
   } catch (exception) {
@@ -45,6 +47,8 @@ jobRouter.post('/oikotie', async (req, res) => {
 jobRouter.post('/avointyopaikka', async (req, res) => {
   try {
     let { keyword, location } = req.body
+
+    const nightmare = Nightmare({ show: false })
 
     //avointyopaikka.fi
     //https://avointyopaikka.fi/hae?kw=HAKUSANA&location=LOKAATIO
