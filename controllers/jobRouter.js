@@ -8,6 +8,8 @@ jobRouter.get('/oikotie', async (req, res) => {
   try {
     let { location } = res.body
 
+    let objects = null
+
     nightmare
         .goto('https://tyopaikat.oikotie.fi')
         .type('input.field', 'trainee')
@@ -23,23 +25,21 @@ jobRouter.get('/oikotie', async (req, res) => {
         .end()
         .then( data => {
           const array = Object.values(data)
-          data = (JSON.stringify(array, null, 1))
+          //data = (JSON.stringify(array, null, 1))
+
+          objects = array.map(j => {link: j})
+          objects = (JSON.stringify(data, null, 1))
           //let list = (JSON.stringify(array, null, 1))
 
-          // fs.writeFile('links.json', list, (err) => {
-          //   if (err) throw err
-          //   console.log('JSON saved!')
-          // })
-
           //data = {objects: list}
-          console.log(data)
+          console.log(objects)
 
         })
         .catch(error => {
           console.error('scraping failed:', error)
         })
 
-    res.json(data)
+    res.json(objects)
 
   } catch (exception) {
     return res.status(500).json({ error: 'something went wrong...' })
