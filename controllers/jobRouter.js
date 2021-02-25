@@ -43,10 +43,12 @@ jobRouter.get('/oikotie', async (req, res) => {
 
 jobRouter.get('/avointyopaikka', async (req, res) => {
   try {
+    let { keyword, location } = req.body
+
     //avointyopaikka.fi
     //https://avointyopaikka.fi/hae?kw=HAKUSANA&location=LOKAATIO
     nightmare
-    .goto('https://avointyopaikka.fi/hae?kw=Developer&location=Oulu')
+    .goto(`https://avointyopaikka.fi/hae?kw=${keyword}&location=${location}`)
     .wait('div.search-results__content')
     .evaluate(selector => {
       return Array.from(document.querySelectorAll(selector))
