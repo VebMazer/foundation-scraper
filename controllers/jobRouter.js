@@ -10,10 +10,12 @@ jobRouter.get('/oikotie', async (req, res) => {
 
     let objects = null
 
+    //https://tyopaikat.oikotie.fi/tyopaikat/helsinki?hakusana=Developer
     nightmare
-        .goto('https://tyopaikat.oikotie.fi')
-        .type('input.field', 'trainee')
-        .click('button.primary')
+    
+        .goto('https://tyopaikat.oikotie.fi/tyopaikat/helsinki?hakusana=Developer')
+        //.type('input.field', 'trainee')
+        //.click('button.primary')
         .wait('div.job-ad-list-with-publication-date-titles')
         .evaluate(selector => {
           return Array.from(document.querySelectorAll(selector))
@@ -49,7 +51,6 @@ jobRouter.get('/oikotie', async (req, res) => {
 
 jobRouter.get('/avointyopaikka', async (req, res) => {
   try {
-
     //avointyopaikka.fi
     //https://avointyopaikka.fi/hae?kw=HAKUSANA&location=LOKAATIO
     nightmare
