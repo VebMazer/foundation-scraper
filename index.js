@@ -2,7 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const Nightmare = require('nightmare')
 const fs = require('fs')
-
+const cors = require('cors')
+//const http = require('http').createServer(App)
 
 const nightmare = Nightmare({ show: false })
 
@@ -12,98 +13,11 @@ let data = {}
 
 const app = express()
 
+app.use(cors())
+app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-    //avointyopaikka.fi
-
-    // nightmare
-    // .goto('https://avointyopaikka.fi/')
-    // .type('#s2id_autogen1', 'Developer')  //Tehtävä /yritys / hakuasan
-    // .type('#s2id_autogen2', 'Helsinki')  //Paikkakunta
-    // .click('button.primary')  //Tähän button, jolla pääsee eteenpäin
-    // .wait('div.job-ad-list-with-publication-date-titles')
-    // .evaluate(selector => {
-    //   return Array.from(document.querySelectorAll(selector))
-    //     .map(element => element.href)
-    //   //.filter((el) => {
-    //   //    return el && el != ''
-    //   //});
-    // }, 'a.job-ad-list-item-link')
-    // .end()
-    // .then( data => {
-    //   const array = Object.values(data)
-    //   data = (JSON.stringify(array, null, 1))
-    //   //let list = (JSON.stringify(array, null, 1))
-    //
-    //   // fs.writeFile('links.json', list, (err) => {
-    //   //   if (err) throw err
-    //   //   console.log('JSON saved!')
-    //   // })
-    //
-    //   //data = {objects: list}
-    //   console.log(data)
-    //
-    // })
-    // .catch(error => {
-    //   console.error('scraping failed:', error)
-    // })
-
-    // nightmare
-    // .goto('https://avointyopaikka.fi/')
-    // .type('#s2id_autogen1', 'Developer')  //Tehtävä /yritys / hakuasan
-    // .type('#s2id_autogen2', 'Helsinki')  //Paikkakunta
-    // .click('button.primary')  //Tähän button, jolla pääsee eteenpäin
-    // .wait('div.job-ad-list-with-publication-date-titles')
-    // .evaluate(selector => {
-    //   return Array.from(document.querySelectorAll(selector))
-    //     .map(element => element.href)
-    //   //.filter((el) => {
-    //   //    return el && el != ''
-    //   //});
-    // }, 'a.job-item__link wrapping-link')
-    // .end()
-    // .then( data => {
-    //   const array = Object.values(data)
-    //   data = (JSON.stringify(array, null, 1))
-      //let list = (JSON.stringify(array, null, 1))
-
-      // fs.writeFile('links.json', list, (err) => {
-      //   if (err) throw err
-      //   console.log('JSON saved!')
-      // })
-
-      //data = {objects: list}
-    //   console.log(data)
-    //
-    // })
-    // .catch(error => {
-    //   console.error('scraping failed:', error)
-    // })
-
-    // nightmare
-    //     .goto('https://tyopaikat.oikotie.fi/tyopaikat/helsinki?hakusana=Developer')
-    //     //.type('input.field', 'trainee')
-    //     //.click('button.primary')
-    //     .wait('div.job-ad-list-with-publication-date-titles')
-    //     .evaluate(selector => {
-    //       return Array.from(document.querySelectorAll(selector))
-    //         .map(element => element.href)
-    //       //.filter((el) => {
-    //       //    return el && el != ''
-    //       //});
-    //     }, 'a.job-ad-list-item-link')
-    //     .end()
-    //     .then( data => {
-    //       const array = Object.values(data)
-    //
-    //       let objects = array.map(j => ({link: j}))
-    //       console.log(objects)
-    //
-    //     })
-    //     .catch(error => {
-    //       console.error('scraping failed:', error)
-    //     })
-
+app.use(express.static('build'))
 
 app.get('/', (req, res) => {
   // if(data === {}){

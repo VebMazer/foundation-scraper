@@ -4,14 +4,14 @@ const Nightmare = require('nightmare')
 const nightmare = Nightmare({ show: false })
 
 //Oikotie työpaikka haku.
-jobRouter.get('/oikotie', async (req, res) => {
+jobRouter.post('/oikotie', async (req, res) => {
   try {
     let { } = req.body
 
     let objects = null
 
     //https://tyopaikat.oikotie.fi/tyopaikat/helsinki?hakusana=Developer
-    nightmare
+    await nightmare
         .goto('https://tyopaikat.oikotie.fi/tyopaikat/helsinki?hakusana=Developer')
         //.type('input.field', 'trainee')
         //.click('button.primary')
@@ -33,6 +33,7 @@ jobRouter.get('/oikotie', async (req, res) => {
           console.error('scraping failed:', error)
         })
 
+    //console.log(objects)
     res.json(objects)
 
   } catch (exception) {
@@ -41,7 +42,7 @@ jobRouter.get('/oikotie', async (req, res) => {
 })
 
 
-jobRouter.get('/avointyopaikka', async (req, res) => {
+jobRouter.post('/avointyopaikka', async (req, res) => {
   try {
     let { keyword, location } = req.body
 
