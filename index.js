@@ -1,44 +1,19 @@
 const express = require('express')
-const app = express()
-
+const bodyParser = require('body-parser')
 const Nightmare = require('nightmare')
-const fs = require('fs');
+const fs = require('fs')
+
+
 const nightmare = Nightmare({ show: false })
+
+const jobRouter = require('./controllers/jobRouter')
 
 let data = {}
 
-//Oikotie.fi
-/*nightmare
-    .goto('https://tyopaikat.oikotie.fi')
-    .type('input.field', 'trainee')
-    .click('button.primary')
-    .wait('div.job-ad-list-with-publication-date-titles')
-    .evaluate(selector => {
-      return Array.from(document.querySelectorAll(selector))
-        .map(element => element.href)
-      //.filter((el) => {
-      //    return el && el != ''
-      //});
-    }, 'a.job-ad-list-item-link')
-    .end()
-    .then( data => {
-      const array = Object.values(data)
-      data = (JSON.stringify(array, null, 1))
-      //let list = (JSON.stringify(array, null, 1))
+const app = express()
 
-      // fs.writeFile('links.json', list, (err) => {
-      //   if (err) throw err
-      //   console.log('JSON saved!')
-      // })
+app.use(bodyParser.json())
 
-      //data = {objects: list}
-      console.log(data)
-
-    })
-    .catch(error => {
-      console.error('scraping failed:', error)
-    })
-*/
     //avointyopaikka.fi
     nightmare
     .goto('https://avointyopaikka.fi/')
@@ -81,10 +56,9 @@ app.get('/', (req, res) => {
   // }
   res.json(data)
 
-    })
+})
 
-const scrapingRouter = require('express').Router()
-app.use('/', scrapingRouter)
+app.use('/jobs', jobRouter)
 
 const PORT = 3002
 app.listen(PORT, () => {
