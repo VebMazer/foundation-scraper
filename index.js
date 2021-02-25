@@ -52,7 +52,7 @@ let data = {}
       //.filter((el) => {
       //    return el && el != ''
       //});
-    }, 'a.job-ad-list-item-link')
+    }, 'a.job-item__link wrapping-link')
     .end()
     .then( data => {
       const array = Object.values(data)
