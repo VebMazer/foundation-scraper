@@ -50,6 +50,22 @@ app.get('/', (req, res) => {
     })
 
 const scrapingRouter = require('express').Router()
+
+scrapingRouter.get('/oikotie', async (req, res) => {
+  try {
+    let { location }
+
+    link = 'https://tyopaikat.oikotie.fi'
+
+
+
+    res.json(user.jobs.map(Job.format))
+
+  } catch (exception) {
+    return res.status(500).json({ error: 'something went wrong...' })
+  }
+})
+
 app.use('/', scrapingRouter)
 
 const PORT = 3002
