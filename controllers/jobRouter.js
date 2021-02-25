@@ -4,7 +4,7 @@ const Nightmare = require('nightmare')
 const nightmare = Nightmare({ show: false })
 
 //Oikotie työpaikka haku.
-scrapingRouter.get('/oikotie', async (req, res) => {
+jobRouter.get('/oikotie', async (req, res) => {
   try {
     let { location } = res.body
 
@@ -47,7 +47,7 @@ scrapingRouter.get('/oikotie', async (req, res) => {
 })
 
 
-scrapingRouter.get('/avointyopaikka', async (req, res) => {
+jobRouter.get('/avointyopaikka', async (req, res) => {
   try {
 
 
@@ -55,7 +55,7 @@ scrapingRouter.get('/avointyopaikka', async (req, res) => {
     return res.status(500).json({ error: 'something went wrong...' })
   }
 
-}
+})
 
 //Oikotie.fi
 /*nightmare
